@@ -1,9 +1,14 @@
+# makefile created on 2016-09-09 17:20:52.470511
+# by pymake (version 1.1.0)
+# using the gfortran fortran and gcc c/c++ compilers.
+
+# Define the directories for the object and module files,
+# the executable, and the executable name and path.
+OBJDIR = ./obj_temp
+BINDIR = ../bin
 PROGRAM = ../bin/helloworld.mac
 
-BINDIR=../bin/
 SOURCEDIR1=../src/
-
-OBJDIR = ./obj_temp
 
 VPATH = \
 ${SOURCEDIR1} 
@@ -26,9 +31,11 @@ $(OBJDIR)/helloworld.o
 
 # Define task functions
 
+# Create the bin directory and compile and link the executable
 all: makebin | helloworld
 
-makebin:
+# Make the bin directory for the executable
+makebin :
 	mkdir -p $(BINDIR)
 
 # Define the objects that make up helloworld.mac
@@ -55,17 +62,18 @@ $(OBJDIR)/%.o : %.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-
 $(OBJDIR)/%.o : %.cpp
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-
+# Clean the object and module files and the executable
 .PHONY : clean
 clean : 
 	-rm -rf $(OBJDIR)
+	-rm -rf $(BINDIR)
 
-.PHONY : cleanall
-cleanall : 
-	-rm -rf $(OBJDIR) $(BINDIR)
+# Clean the object and module files
+.PHONY : cleanobj
+cleanobj : 
+	-rm -rf $(OBJDIR)
 

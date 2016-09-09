@@ -1,0 +1,35 @@
+<project name="jenkins_test" default="jenkins" basedir=".">
+    <description>
+        Jenkins Ant file for jenkins_test
+    </description>
+  <!-- set global properties for this build -->
+  <property name="app" location="projectx"/>
+  <property name="make.cmd" value="/usr/bin/make"/>
+  <property name="build.native" value="./"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+  </target>
+
+  <target name="cleanall"
+        description="clean up all files" >
+    <exec dir="${pymake}" executable="${make}" failonerror="true">
+    <arg value="clean"/>
+    </exec>
+  </target>
+
+  <target name="compile"
+        description="compile the source" >
+    <exec dir="${pymake}" executable="${make}" failonerror="true">
+    </exec>
+  </target>
+
+  <target name="clean"
+        description="clean up object files" >
+    <exec dir="${pymake}" executable="${make}" failonerror="true">
+    <arg value="cleanobj"/>
+    </exec>
+  </target>
+
+</project>
