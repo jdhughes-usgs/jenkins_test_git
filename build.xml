@@ -1,33 +1,40 @@
-<project name="jenkins_test" default="jenkins" basedir=".">
+<project name="jenkins_test" default="helloworld" basedir=".">
     <description>
         Jenkins Ant file for jenkins_test
     </description>
   <!-- set global properties for this build -->
-  <property name="app" location="projectx"/>
+  <property name="app" location="helloworld"/>
   <property name="make.cmd" value="/usr/bin/make"/>
-  <property name="build.native" value="./"/>
+  <property name="makedir" value="./pymake/"/>
 
   <target name="init">
     <!-- Create the time stamp -->
     <tstamp/>
   </target>
 
-  <target name="cleanall"
+  <target name="all" depends="clean,compile,cleanobj"
         description="clean up all files" >
-    <exec dir="${pymake}" executable="${make}" failonerror="true">
+    <exec dir="${makedir}" executable="${make.cmd}" failonerror="true">
+    <arg value="clean"/>
+    </exec>
+  </target>
+
+  <target name="clean"
+        description="clean up all files" >
+    <exec dir="${makedir}" executable="${make.cmd}" failonerror="true">
     <arg value="clean"/>
     </exec>
   </target>
 
   <target name="compile"
         description="compile the source" >
-    <exec dir="${pymake}" executable="${make}" failonerror="true">
+    <exec dir="${makedir}" executable="${make.cmd}" failonerror="true">
     </exec>
   </target>
 
-  <target name="clean"
+  <target name="cleanobj"
         description="clean up object files" >
-    <exec dir="${pymake}" executable="${make}" failonerror="true">
+    <exec dir="${makedir}" executable="${make.cmd}" failonerror="true">
     <arg value="cleanobj"/>
     </exec>
   </target>
