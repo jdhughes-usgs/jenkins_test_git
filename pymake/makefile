@@ -17,7 +17,7 @@ ${SOURCEDIR1}
 
 # Define the Fortran compile flags
 F90 = gfortran
-F90FLAGS = -O2 -fbacktrace -ffpe-summary=overflow 
+F90FLAGS = -O2 -fbacktrace 
 
 # Define the C compile flags
 CC = gcc
