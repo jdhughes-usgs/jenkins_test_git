@@ -32,10 +32,11 @@ $(OBJDIR)/helloworld.o
 # Define task functions
 
 # Create the bin directory and compile and link the executable
-all: makebin | helloworld
+all: makedirs | helloworld
 
 # Make the bin directory for the executable
-makebin :
+makedirs :
+	mkdir -p $(OBJDIR)
 	mkdir -p $(BINDIR)
 
 # Define the objects that make up helloworld.mac
@@ -43,27 +44,21 @@ helloworld: $(OBJECTS)
 	-$(F90) $(F90FLAGS) -o $(PROGRAM) $(OBJECTS) $(SYSLIBS) -I$(OBJDIR) -J$(OBJDIR) 
 
 $(OBJDIR)/%.o : %.f
-	@mkdir -p $(@D)
 	$(F90) $(F90FLAGS) -c $< -o $@ -I$(OBJDIR) -J$(OBJDIR) 
 
 $(OBJDIR)/%.o : %.f90
-	@mkdir -p $(@D)
 	$(F90) $(F90FLAGS) -c $< -o $@ -I$(OBJDIR) -J$(OBJDIR) 
 
 $(OBJDIR)/%.o : %.F90
-	@mkdir -p $(@D)
 	$(F90) $(F90FLAGS) -c $< -o $@ -I$(OBJDIR) -J$(OBJDIR) 
 
 $(OBJDIR)/%.o : %.fpp
-	@mkdir -p $(@D)
 	$(F90) $(F90FLAGS) -c $< -o $@ -I$(OBJDIR) -J$(OBJDIR) 
 
 $(OBJDIR)/%.o : %.c
-	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR)/%.o : %.cpp
-	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean the object and module files and the executable
